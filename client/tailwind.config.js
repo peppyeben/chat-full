@@ -2,9 +2,8 @@
 module.exports = {
     content: [
         "./index.html",
-
-        "./src/*.{vue,js}",
-        "./src/**/*.vue",
+        "./public/index.html",
+        "./src/**/*.{vue,js,ts,jsx,tsx}",
         "./node_modules/tw-elements/js/**/*.js",
     ],
     theme: {
