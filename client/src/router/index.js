@@ -17,6 +17,11 @@ const routes = [
         name: "users",
         component: () => import("../views/UsersView.vue"),
     },
+    {
+        path: "/users/:user",
+        name: "user-chat",
+        component: () => import("../views/UserChatView.vue"),
+    },
 ];
 
 const router = createRouter({
