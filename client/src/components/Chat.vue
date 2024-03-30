@@ -11,11 +11,14 @@
                     <div class="flex flex-col h-full overflow-x-auto mb-4">
                         <div class="flex flex-col h-full space-y-2 p-2">
                             <div
-                                v-for="(message, i) in chatInfo.chats"
+                                v-for="(message, i) in state.messages"
+                                :key="i"
                                 class="grid grid-cols-12 gap-y-2"
                             >
+                                <!-- <li>{{ message }}</li>
+                                <li>{{ userId }}</li> -->
                                 <div
-                                    v-if="message.sender_id != 0"
+                                    v-if="message.sender_id != userId.sender_id"
                                     class="col-start-1 col-end-8 rounded-lg"
                                 >
                                     <div class="flex flex-row items-center">
@@ -27,7 +30,7 @@
                                         <div
                                             class="relative ml-3 text-sm bg-white py-2 px-2 shadow rounded-xl"
                                         >
-                                            <div>{{ message.content }}</div>
+                                            <div>{{ message.message }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -47,7 +50,7 @@
                                         <div
                                             class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
                                         >
-                                            <div>{{ message.content }}</div>
+                                            <div>{{ message.message }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -82,6 +85,7 @@
                                 <input
                                     type="text"
                                     class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
+                                    v-model="state.message"
                                 />
                                 <button
                                     class="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600"
@@ -106,6 +110,7 @@
                         <div class="ml-4">
                             <button
                                 class="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0"
+                                @click="sendMessage"
                             >
                                 <span>Send</span>
                                 <span class="ml-2">
@@ -135,31 +140,53 @@
 
 <script>
     import { ref, onBeforeMount } from "vue";
+    import { reactive, computed } from "vue";
+    import { useStore } from "vuex";
 
     export default {
         name: "Chat",
         props: {
-            chatInfo: {
-                type: Object,
-                // required: true,
+            userId: {
+                type: Object, // Adjust the type according to your requirements
+                required: true,
             },
         },
         setup(props) {
-            const chatInfo = ref(props.chatInfo);
-            const isDropdownHidden = ref(true);
+            const store = useStore();
 
-            onBeforeMount(() => {
-                console.log(chatInfo.value);
+            // Using reactive to create reactive state
+            const state = reactive({
+                message: "",
+                messages: computed(() => store.state.socket.messages), // Accessing messages from store
             });
 
-            const toggleDropdown = () => {
-                isDropdownHidden.value = !isDropdownHidden.value;
+            // Using ref to create reactive reference
+            const userId = ref(null);
+
+            onBeforeMount(() => {
+                console.log(props.userId);
+
+                store.dispatch("socket/joinRoom", props.userId.id);
+                userId.value = props.userId;
+
+                console.log(userId.value);
+            });
+
+            const sendMessage = () => {
+                store.dispatch("socket/sendMessage", {
+                    room: props.userId.id,
+                    message: state.message,
+                    sender_id: props.userId.sender_id,
+                });
+                state.message = ""; // Reset the message input
             };
 
             return {
-                chatInfo,
-                toggleDropdown,
-                isDropdownHidden,
+                state, // Correctly expose state
+                sendMessage,
+                userId,
+                // userId: props.userId.id,
+                // userId: userId.value.id,
             };
         },
     };

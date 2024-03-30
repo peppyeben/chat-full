@@ -881,16 +881,8 @@ input[type="range"]:active::-webkit-slider-thumb {
   height: 100vh;
 }
 
-.h-8 {
-  height: 2rem;
-}
-
 .w-0 {
   width: 0px;
-}
-
-.w-10 {
-  width: 2.5rem;
 }
 
 .w-12 {
@@ -923,10 +915,6 @@ input[type="range"]:active::-webkit-slider-thumb {
 
 .w-screen {
   width: 100vw;
-}
-
-.w-8 {
-  width: 2rem;
 }
 
 .max-w-\[200px\] {
@@ -1073,10 +1061,6 @@ input[type="range"]:active::-webkit-slider-thumb {
 
 .gap-y-2 {
   row-gap: 0.5rem;
-}
-
-.gap-y-1 {
-  row-gap: 0.25rem;
 }
 
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
@@ -1258,8 +1242,8 @@ input[type="range"]:active::-webkit-slider-thumb {
   background-clip: padding-box;
 }
 
-.p-3 {
-  padding: 0.75rem;
+.p-2 {
+  padding: 0.5rem;
 }
 
 .p-4 {
@@ -1268,10 +1252,6 @@ input[type="range"]:active::-webkit-slider-thumb {
 
 .p-6 {
   padding: 1.5rem;
-}
-
-.p-2 {
-  padding: 0.5rem;
 }
 
 .px-2 {
@@ -1413,6 +1393,11 @@ input[type="range"]:active::-webkit-slider-thumb {
   color: rgb(31 41 55 / var(--tw-text-opacity));
 }
 
+.text-indigo-700 {
+  --tw-text-opacity: 1;
+  color: rgb(67 56 202 / var(--tw-text-opacity));
+}
+
 .text-indigo-800 {
   --tw-text-opacity: 1;
   color: rgb(55 48 163 / var(--tw-text-opacity));
@@ -1451,16 +1436,6 @@ input[type="range"]:active::-webkit-slider-thumb {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-indigo-500 {
-  --tw-text-opacity: 1;
-  color: rgb(99 102 241 / var(--tw-text-opacity));
-}
-
-.text-indigo-700 {
-  --tw-text-opacity: 1;
-  color: rgb(67 56 202 / var(--tw-text-opacity));
 }
 
 .no-underline {
@@ -1518,20 +1493,6 @@ input[type="range"]:active::-webkit-slider-thumb {
   --tw-shadow: 0 2px 15px -3px rgba(0,0,0,0.04),0 10px 20px -2px rgba(0,0,0,0.07);
   --tw-shadow-colored: 0 2px 15px -3px var(--tw-shadow-color), 0 10px 20px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.shadow-gray-200 {
-  --tw-shadow-color: #e5e7eb;
-  --tw-shadow: var(--tw-shadow-colored);
-}
-
-.shadow-gray-500 {
-  --tw-shadow-color: #6b7280;
-  --tw-shadow: var(--tw-shadow-colored);
-}
-
-.outline-double {
-  outline-style: double;
 }
 
 .blur {

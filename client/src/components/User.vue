@@ -7,17 +7,18 @@
         >
             <h5 class="text-sm font-medium leading-tight">{{ user.id }}</h5>
             <p class="text-sm">
-                {{ user.email }}
+                <!-- {{ user.email }} -->
+                {{ user._id }}
             </p>
             <EnvelopeIcon
-                @click="routeToUserChat(user.id)"
+                @click="routeToAdminChat(user.name)"
                 class="h-6 w-6 text-blue-500 cursor-pointer hover:text-blue-600"
             />
         </div>
     </div>
 </template>
 <script>
-    import { ref, onMounted } from "vue";
+    import { ref, onMounted, onBeforeMount } from "vue";
 
     import { useStore } from "vuex";
     import { useRouter, useRoute } from "vue-router";
@@ -32,25 +33,37 @@
         components: {
             EnvelopeIcon,
         },
-        setup() {
+        props: {
+            users: {
+                type: Object,
+                required: true,
+            },
+        },
+        setup(props) {
             const router = useRouter();
+            const store = useStore();
 
             const users = ref([]);
+            onBeforeMount(async () => {
+                await store.dispatch("getRooms");
+
+                users.value = props.users;
+            });
             onMounted(() => {
                 initTWE({ Ripple });
 
-                users.value = demoData;
+                // users.value = demoData;
 
                 console.log(demoData);
             });
 
-            const routeToUserChat = (x) => {
-                router.push({ name: "user-chat", params: { user: x } });
+            const routeToAdminChat = (x) => {
+                router.push({ name: "admin-user-chat", params: { user: x } });
             };
 
             return {
                 users,
-                routeToUserChat,
+                routeToAdminChat,
             };
         },
     };
