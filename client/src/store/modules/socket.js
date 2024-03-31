@@ -1,7 +1,7 @@
 // src/store/modules/socket.js
 import io from "socket.io-client";
 
-const socket = io("http://localhost:80");
+const socket = io(process.env.VUE_APP_SERVER_URL);
 
 export default {
     namespaced: true,
@@ -26,7 +26,7 @@ export default {
         initSocketListeners({ commit }) {
             socket.on("message", (message) => {
                 commit("ADD_MESSAGE", message);
-                console.log(message)
+                console.log(message);
             });
         },
     },
