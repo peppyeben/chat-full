@@ -13,7 +13,14 @@ const authenticateAdmin = require("./middleware/authenticate-admin");
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
-    cors: { origin: ["http://localhost:8080", "http://localhost:4000"] },
+    cors: {
+        origin: process.env.FE_URL
+        // origin: [
+        //     "http://localhost:8080",
+        //     "http://localhost:4000",
+        //     "http://localhost:1234",
+        // ],
+    },
 });
 
 const roomSchema = new mongoose.Schema({

@@ -5,7 +5,7 @@
             :key="index"
             class="flex flex-row justify-between items-center rounded-none w-full bg-white py-2 px-6 text-surface shadow-secondary-1"
         >
-            <h5 class="text-sm font-medium leading-tight">{{ user.id }}</h5>
+            <h5 class="text-sm font-medium leading-tight">{{ user.name }}</h5>
             <p class="text-sm">
                 <!-- {{ user.email }} -->
                 {{ user._id }}
