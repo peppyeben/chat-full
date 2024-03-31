@@ -14,7 +14,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
     cors: {
-        origin: process.env.FE_URL
+        origin: [process.env.FE_URL, process.env.DASH_URL]
         // origin: [
         //     "http://localhost:8080",
         //     "http://localhost:4000",
