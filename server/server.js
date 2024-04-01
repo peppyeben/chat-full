@@ -107,10 +107,10 @@ app.get("/rooms", authenticateAdmin, async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 80;
+// const PORT = process.env.PORT || 80;
 
-server.listen(PORT, () => {
-    // server.listen(() => {
+// server.listen(PORT, () => {
+server.listen(() => {
     console.log(`Server is running`);
-    console.log(`Server is running on port ${PORT}`);
+    // console.log(`Server is running on port ${PORT}`);
 });
