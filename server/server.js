@@ -14,7 +14,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
     cors: {
-        origin: [process.env.FE_URL, process.env.DASH_URL]
+        origin: [process.env.FE_URL, process.env.DASH_URL],
         // origin: [
         //     "http://localhost:8080",
         //     "http://localhost:4000",
@@ -77,8 +77,9 @@ app.get("/rooms", authenticateAdmin, async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 80;
+// const PORT = process.env.PORT || 80;
 
-server.listen(PORT, () => {
+// server.listen(PORT, () => {
+server.listen(() => {
     console.log(`Server is running on port ${PORT}`);
 });

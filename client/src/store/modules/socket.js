@@ -1,7 +1,12 @@
 // src/store/modules/socket.js
 import io from "socket.io-client";
 
-const socket = io(process.env.VUE_APP_SERVER_URL);
+const socket = io(process.env.VUE_APP_SERVER_URL, {
+    withCredentials: false,
+    extraHeaders: {
+        "dash-header": "abcd",
+    },
+});
 
 export default {
     namespaced: true,
