@@ -1,11 +1,11 @@
 // src/store/modules/socket.js
 import io from "socket.io-client";
 
-const socket = io(process.env.VUE_APP_SERVER_URL, {
-    withCredentials: false,
-    extraHeaders: {
-        "dash-header": "abcd",
-    },
+const { VUE_APP_SERVER_URL } = process.env;
+
+const socket = io(VUE_APP_SERVER_URL, {
+    // transports: ["websocket", "polling", "flashsocket"],
+    transports: ["polling", "flashsocket"],
 });
 
 export default {
@@ -20,7 +20,8 @@ export default {
     },
     actions: {
         joinRoom({ commit }, roomName) {
-            socket.emit("join-room", roomName);
+            // socket.emit("join-room", { name: roomName, isAdmin: true });
+            socket.emit("join-room", { name: roomName });
             console.log("Joined room");
         },
         sendMessage({ commit, state }, { room, message, sender_id }) {
@@ -31,6 +32,15 @@ export default {
         initSocketListeners({ commit }) {
             socket.on("message", (message) => {
                 commit("ADD_MESSAGE", message);
+                console.log(message);
+            });
+
+            socket.on("previous-messages", (message) => {
+                if (Array.isArray(message) && message.length > 0) {
+                    message.forEach((x) => {
+                        commit("ADD_MESSAGE", x);
+                    });
+                }
                 console.log(message);
             });
         },

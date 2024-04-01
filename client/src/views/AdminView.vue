@@ -5,10 +5,7 @@
 
 <script>
     import NavBar from "@/components/NavBar.vue";
-    import Chat from "@/components/Chat.vue";
-
     import User from "@/components/User.vue";
-
     import { onBeforeMount, onMounted, ref } from "vue";
     import { useStore } from "vuex";
 
@@ -20,13 +17,17 @@
         },
         setup() {
             const store = useStore();
-            const users = ref(null);
+            const users = ref({}); // Initialize as an empty object
+
             onBeforeMount(async () => {
                 await store.dispatch("getRooms");
 
-                users.value = store.state.rooms;
-                console.log("USERS ", users.value)
+                // Check if store.state.rooms is null or undefined before assigning
+                // If it's null or undefined, initialize users.value as an empty object
+                users.value = store.state.rooms || {};
+                console.log("USERS ", users.value);
             });
+
             onMounted(() => {
                 console.log(process.env.VUE_APP_ADMIN_TOKEN);
             });
