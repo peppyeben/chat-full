@@ -5,7 +5,7 @@ const { VUE_APP_SERVER_URL } = process.env;
 
 const socket = io(VUE_APP_SERVER_URL, {
     // transports: ["websocket", "polling", "flashsocket"],
-    transports: ["polling", "flashsocket"],
+    transports: ["polling", "flashsocket", "websocket"],
 });
 
 export default {
