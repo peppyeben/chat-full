@@ -4,8 +4,9 @@ import io from "socket.io-client";
 const { VUE_APP_SERVER_URL } = process.env;
 
 const socket = io(VUE_APP_SERVER_URL, {
-    // transports: ["websocket", "polling", "flashsocket"],
     transports: ["polling", "flashsocket", "websocket"],
+    // transports: ["websocket", "polling", "flashsocket"],
+    // transports: ["polling", "flashsocket", "websocket"],
 });
 
 export default {
